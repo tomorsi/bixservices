@@ -38,16 +38,27 @@ public class PlayerPoolService {
    @Path("/skatersByForm")
    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
    @Produces(MediaType.TEXT_HTML)
-   public String addSkater(@FormParam("firstname") String firstname,
-		   @FormParam("lastname") String lastname,
-		   @FormParam("emailprimary") String emailprimary,
-		   @FormParam("smstextnumber") String smstextnumber,
-		   @FormParam("zipcode") String zipcode,
+   public String addSkater(@FormParam("firstName") String firstName,
+		   @FormParam("lastName") String lastName,
+		   @FormParam("emailPrimary") String emailPrimary,
+		   @FormParam("smsTextNumber") String smsTextNumber,
+		   @FormParam("zipCode") String zipCode,
 		   @FormParam("password") String password)
    {
 	     
+	   Skater skater = new Skater();
 	   
-	   return SUCCESS_RESULT;
+	   skater.setFirstName(firstName);
+	   skater.setLastName(lastName);
+	   skater.setEmailPrimary(emailPrimary);
+	   skater.setZipCode(zipCode);
+	   skater.setPassword(password);
+	   
+	   if (skaterModel.addSkater(skater))
+	   	 return SUCCESS_RESULT;
+	   else
+	   	 return FAILURE_RESULT;   
+   
    }
    
    /*
@@ -57,10 +68,12 @@ public class PlayerPoolService {
    @Path("/skatersByXml")
    @Consumes(MediaType.APPLICATION_XML)
    @Produces(MediaType.TEXT_HTML)
-   public String addSkater(JAXBElement<Skater> skater)
+   public String addSkater(Skater skater)
    {
-	     	   
-	   return SUCCESS_RESULT;
+	   if (skaterModel.addSkater(skater))
+	   	 return SUCCESS_RESULT;
+	   else
+	   	 return FAILURE_RESULT;   
    }
    
    @POST

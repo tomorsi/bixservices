@@ -2,6 +2,7 @@ package com.zingaretti.bix;
 
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -17,6 +18,9 @@ public class SkaterModel implements Serializable {
 	private BasicDataSource ds = null;
 	static private final String driverName = "org.postgresql.Driver";
 	static private final String connectionUrl ="jdbc:postgressql://bixdb/bixdb";
+	static private final String SQL_INSERT = 
+		"INSERT INTO SKATER(FIRSTNAME,LASTNAME,EMAILPRIMARY,SMTEXTNUMBER,ZIPCODE,PASSWORD,SKATER) "+
+		"VALUES(?,?,?,?_?,?,TRUE)";
 	
 	SkaterModel()
 	{
@@ -39,15 +43,32 @@ public class SkaterModel implements Serializable {
 		return c;
 	}
 	
-	public void addSkater(Skater s)
+	public Boolean addSkater(Skater skater)
 	{
-	
+		Boolean bSuccess = true;
 		
+		try {
+		
+		Connection connection = this.getConnection();
+		PreparedStatement statement = connection.prepareStatement(SQL_INSERT);
+		statement.setString(1,skater.getFirstName());
+		statement.setString(2,skater.getLastName());
+		statement.setString(3,skater.getEmailPrimary());
+		statement.setString(4,skater.getSmsTextNumber());
+		statement.setString(5,skater.getZipCode());
+		statement.setString(6,skater.getPassword());
+		statement.executeUpdate();
+		} 
+		catch (SQLException se)
+		{
+			bSuccess =false;
+		}
+		
+		return bSuccess;
 	}
 	
 	public List<Skater> getFullList()
 	{
-		
 		return null;
 	}
 }

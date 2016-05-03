@@ -1,5 +1,9 @@
 package com.zingaretti.bix;
 
-public class Goalie {
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
+public class Goalie extends Skater {
+	
+	
 }

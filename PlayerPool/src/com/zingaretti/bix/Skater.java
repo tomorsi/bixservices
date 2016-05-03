@@ -1,8 +1,11 @@
 package com.zingaretti.bix;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAccessType;
 
-@XmlRootElement(name = "skater")
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Skater {
 
 	
@@ -12,7 +15,7 @@ public class Skater {
 	private String smsTextNumber;
 	private String zipCode;
 	private String password;
-	
+		
 	public String getFirstName() {
 		return firstName;
 	}
@@ -46,7 +49,7 @@ public class Skater {
 	public String getPassword() {
 		return password;
 	}
-	public void setPwd(String password) {
+	public void setPassword(String password) {
 		this.password = password;
 	}
 
