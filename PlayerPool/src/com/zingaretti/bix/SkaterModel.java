@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
+
+
 public class SkaterModel implements Serializable {
 	
 	/**

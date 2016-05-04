@@ -32,5 +32,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/postgresql-9.4.1208.jre7.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/validation-api-1.1.0.Final.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-dbcp2-2.1.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/commons-pool2-2.4.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

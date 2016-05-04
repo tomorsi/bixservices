@@ -1,6 +1,8 @@
 package com.zingaretti.bix;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
@@ -17,7 +19,13 @@ import javax.xml.bind.JAXBElement;
 
 @Path("/PlayerPoolService")
 public class PlayerPoolService {
-
+   static Logger logger;
+   
+   static {
+	   	logger = Logger.getLogger("com.appinf");
+   }
+   	
+	
    SkaterModel skaterModel = new SkaterModel();
    GoalieModel goalieModel = new GoalieModel(); 
    
@@ -45,6 +53,8 @@ public class PlayerPoolService {
 		   @FormParam("zipCode") String zipCode,
 		   @FormParam("password") String password)
    {
+	   logger.logp(Level.INFO,"addSkater By Form","addSkater","ENTER");
+	   
 	     
 	   Skater skater = new Skater();
 	   
@@ -70,6 +80,7 @@ public class PlayerPoolService {
    @Produces(MediaType.TEXT_HTML)
    public String addSkater(Skater skater)
    {
+	   logger.logp(Level.INFO,"addSkater By XML","addSkater","ENTER");
 	   if (skaterModel.addSkater(skater))
 	   	 return SUCCESS_RESULT;
 	   else
@@ -81,6 +92,8 @@ public class PlayerPoolService {
    @Consumes(MediaType.APPLICATION_XML)
    public void modifySkater()
    {
+	   
+	   System.out.println("Enter modifyskater");
 	   
    }
 
