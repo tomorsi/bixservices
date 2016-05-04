@@ -2,12 +2,23 @@ package com.zingaretti.bix;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.xml.bind.annotation.XmlAccessType;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Skater {
-
+	static Logger logger;
+	   
+	static {
+	  	logger = Logger.getLogger("com.appinf");
+	  	logger.logp(Level.INFO,"Skater","static","ENTER");
+	}
+	   	
 	
 	private String firstName;
 	private String lastName;
@@ -15,13 +26,24 @@ public class Skater {
 	private String smsTextNumber;
 	private String zipCode;
 	private String password;
+	
+	public Skater()
+	{
+		logger.logp(Level.INFO,"Skater","CTOR","ENTER");
+		
+		
+	}
 		
 	public String getFirstName() {
+		logger.logp(Level.INFO,"Skater","getFirstName","ENTER");
 		return firstName;
 	}
+	
 	public void setFirstName(String firstName) {
+		logger.logp(Level.INFO,"Skater","setFirstName","ENTER");
 		this.firstName = firstName;
 	}
+	
 	public String getLastName() {
 		return lastName;
 	}
