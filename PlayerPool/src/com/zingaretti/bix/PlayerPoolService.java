@@ -32,8 +32,9 @@ public class PlayerPoolService {
    }
    	
 	
-   SkaterModel skaterModel = new SkaterModel();
+   RinkModel RinkModel = new RinkModel();
    GoalieModel goalieModel = new GoalieModel(); 
+   RinkModel rinkModel = new RinkModel();
    
    private static final String SUCCESS_RESULT = "<html>Success</html>";
    private static final String FAILURE_RESULT = "<html>Failure</html>";
@@ -55,8 +56,8 @@ public class PlayerPoolService {
        
    private String getDebugJaxClass() throws Exception
    {
-     JAXBContext jc = JAXBContext.newInstance(Skater.class);
-     Skater s = new Skater();
+     JAXBContext jc = JAXBContext.newInstance(Rink.class);
+     Rink s = new Rink();
      s.setFirstName("Tom");
      s.setLastName("Orsi");
      Marshaller marshaller = jc.createMarshaller();
@@ -68,39 +69,47 @@ public class PlayerPoolService {
    }
    
    @GET
-   @Path("/skaters")
+   @Path("/Rinks")
    @Produces(MediaType.APPLICATION_XML)
-   public List<Skater> getSkaters(){
-	  logger.logp(Level.INFO,"PlayerPoolService","getSkaters","ENTER");
-      return skaterModel.getFullList();
+   public List<Rink> getRinks(){
+	  logger.logp(Level.INFO,"PlayerPoolService","getRinks","ENTER");
+      return RinkModel.getFullList();
    }	
    
+   @GET
+   @Path("/rinks")
+   @Produces(MediaType.APPLICATION_XML)
+   public List<Rink> getRinks(){
+	  logger.logp(Level.INFO,"PlayerPoolService","getRinks","ENTER");
+      return rinkModel.getFullList();
+   }
+   
    /*
-    * Create a skater object using the HTML url encoded form.
+    * Create a Rink object using the HTML url encoded form.
     */
    @PUT
-   @Path("/skatersByForm")
+   @Path("/RinksByForm")
    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
    @Produces(MediaType.TEXT_HTML)
-   public String addSkater(@FormParam("firstName") String firstName,
+   public String addRink(@FormParam("firstName") String firstName,
 		   @FormParam("lastName") String lastName,
 		   @FormParam("emailPrimary") String emailPrimary,
 		   @FormParam("smsTextNumber") String smsTextNumber,
 		   @FormParam("zipCode") String zipCode,
 		   @FormParam("password") String password)
    {
-	   logger.logp(Level.INFO,"addSkater By Form","addSkater","ENTER");
+	   logger.logp(Level.INFO,"addRink By Form","addRink","ENTER");
 	   
 	     
-	   Skater skater = new Skater();
+	   Rink Rink = new Rink();
 	   
-	   skater.setFirstName(firstName);
-	   skater.setLastName(lastName);
-	   skater.setEmailPrimary(emailPrimary);
-	   skater.setZipCode(zipCode);
-	   skater.setPassword(password);
+	   Rink.setFirstName(firstName);
+	   Rink.setLastName(lastName);
+	   Rink.setEmailPrimary(emailPrimary);
+	   Rink.setZipCode(zipCode);
+	   Rink.setPassword(password);
 	   
-	   if (skaterModel.addSkater(skater))
+	   if (RinkModel.addRink(Rink))
 	   	 return SUCCESS_RESULT;
 	   else
 	   	 return FAILURE_RESULT;   
@@ -108,28 +117,46 @@ public class PlayerPoolService {
    }
    
    /*
-    * Create a skater object using the xml application type. 
+    * Add a Rink object using the xml application type. 
     */
    @PUT
-   @Path("/skatersByXml")
+   @Path("/Rinks")
    @Consumes(MediaType.APPLICATION_XML)
    @Produces(MediaType.TEXT_HTML)
-   public String addSkater(Skater skater)
+   public String addRink(Rink Rink)
    {
-	   logger.logp(Level.INFO,"addSkater By XML","addSkater","ENTER");
-	   if (skaterModel.addSkater(skater))
+	   logger.logp(Level.INFO,"addRink By XML","addRink","ENTER");
+	   if (RinkModel.addRink(Rink))
 	   	 return SUCCESS_RESULT;
 	   else
 	   	 return FAILURE_RESULT;   
    }
    
-   @POST
-   @Path("skaters")
+   /*
+    * Add a rink object using the xml data type.
+    */
+   @PUT
+   @Path("rinks")
    @Consumes(MediaType.APPLICATION_XML)
-   public void modifySkater()
+   @Produces(MediaType.TEXT_HTML)
+   public String addRink(Rink rink)
+   {
+	   logger.logp(Level.INFO,"addRink using xml","addRink","ENTER");
+	   if (rinkModel.addRink(rink))
+	      	 return SUCCESS_RESULT;
+	   else
+	   	 return FAILURE_RESULT;   
+   
+   
+   }
+   
+   @POST
+   @Path("Rinks")
+   @Consumes(MediaType.APPLICATION_XML)
+   public void modifyRink()
    {
 	   
-	   System.out.println("Enter modifyskater");
+	   System.out.println("Enter modifyRink");
 	   
    }
 
