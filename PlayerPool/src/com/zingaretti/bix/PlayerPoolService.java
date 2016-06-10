@@ -6,21 +6,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.UriInfo;
-import javax.xml.bind.JAXBElement;
 
 // Debugging
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
-import javax.xml.stream.XMLStreamWriter;
 
 
 @Path("/PlayerPoolService")
@@ -32,7 +27,8 @@ public class PlayerPoolService {
    }
    	
 	
-   RinkModel RinkModel = new RinkModel();
+    
+   SkaterModel skaterModel = new SkaterModel();
    GoalieModel goalieModel = new GoalieModel(); 
    RinkModel rinkModel = new RinkModel();
    
@@ -57,7 +53,7 @@ public class PlayerPoolService {
    private String getDebugJaxClass() throws Exception
    {
      JAXBContext jc = JAXBContext.newInstance(Rink.class);
-     Rink s = new Rink();
+     Skater s = new Skater();
      s.setFirstName("Tom");
      s.setLastName("Orsi");
      Marshaller marshaller = jc.createMarshaller();
@@ -69,11 +65,11 @@ public class PlayerPoolService {
    }
    
    @GET
-   @Path("/Rinks")
+   @Path("/skaters")
    @Produces(MediaType.APPLICATION_XML)
-   public List<Rink> getRinks(){
-	  logger.logp(Level.INFO,"PlayerPoolService","getRinks","ENTER");
-      return RinkModel.getFullList();
+   public List<Skater> getSkaters(){
+	  logger.logp(Level.INFO,"PlayerPoolService","getSkaters","ENTER");
+      return skaterModel.getFullList();
    }	
    
    @GET
@@ -84,59 +80,28 @@ public class PlayerPoolService {
       return rinkModel.getFullList();
    }
    
-   /*
-    * Create a Rink object using the HTML url encoded form.
-    */
-   @PUT
-   @Path("/RinksByForm")
-   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-   @Produces(MediaType.TEXT_HTML)
-   public String addRink(@FormParam("firstName") String firstName,
-		   @FormParam("lastName") String lastName,
-		   @FormParam("emailPrimary") String emailPrimary,
-		   @FormParam("smsTextNumber") String smsTextNumber,
-		   @FormParam("zipCode") String zipCode,
-		   @FormParam("password") String password)
-   {
-	   logger.logp(Level.INFO,"addRink By Form","addRink","ENTER");
-	   
-	     
-	   Rink Rink = new Rink();
-	   
-	   Rink.setFirstName(firstName);
-	   Rink.setLastName(lastName);
-	   Rink.setEmailPrimary(emailPrimary);
-	   Rink.setZipCode(zipCode);
-	   Rink.setPassword(password);
-	   
-	   if (RinkModel.addRink(Rink))
-	   	 return SUCCESS_RESULT;
-	   else
-	   	 return FAILURE_RESULT;   
-   
-   }
    
    /*
-    * Add a Rink object using the xml application type. 
+    * Add a Skater object using the xml application type. 
     */
    @PUT
-   @Path("/Rinks")
+   @Path("/Skater")
    @Consumes(MediaType.APPLICATION_XML)
    @Produces(MediaType.TEXT_HTML)
-   public String addRink(Rink Rink)
+   public String addSkater(Skater skater)
    {
-	   logger.logp(Level.INFO,"addRink By XML","addRink","ENTER");
-	   if (RinkModel.addRink(Rink))
+	   logger.logp(Level.INFO,"addSkater By XML","addSkater","ENTER");
+	   if (skaterModel.addSkater(skater))
 	   	 return SUCCESS_RESULT;
 	   else
 	   	 return FAILURE_RESULT;   
    }
    
    /*
-    * Add a rink object using the xml data type.
+    * Add a Rink object using the xml data type.
     */
    @PUT
-   @Path("rinks")
+   @Path("/Rink")
    @Consumes(MediaType.APPLICATION_XML)
    @Produces(MediaType.TEXT_HTML)
    public String addRink(Rink rink)

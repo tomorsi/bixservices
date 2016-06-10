@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.Types;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,7 +17,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 
 
 
-public class SkaterModel implements Serializable {
+public class RinkModel implements Serializable {
 	static Logger logger;
    
    	static {
@@ -33,13 +33,12 @@ public class SkaterModel implements Serializable {
 	static private final String driverName = "org.postgresql.Driver";
 	static private final String connectionUrl ="jdbc:postgresql://bixdb/bixdb";
 	static private final String SQL_INSERT = 
-		"INSERT INTO PLAYER(FIRSTNAME,LASTNAME,EMAILPRIMARY,SMSTEXTNUMBER,ZIPCODE,PASSWORD,SKATER) "+
-		"VALUES(?,?,?,?,?,?,TRUE)";
-		
+		"INSERT INTO RINK(RINKNAME,ADDRESS,STATECODE,ZIPCODE,MANAGERPHONE,MANAGEREMAIL, PASSWORD) "+
+		"VALUES(?,?,?,?,?,?,?)";
 	static private final String SQL_SELECT_FULL = 
-		"SELECT FIRSTNAME,LASTNAME,EMAILPRIMARY,SMSTEXTNUMBER,ZIPCODE,SKATER) FROM PLAYER";
+		"SELECT RINKNAME,ADDRESS,STATECODE,ZIPCODE,MANAGERPHONE,MANAGEREMAIL FROM RINK";
 		
-	SkaterModel()
+	RinkModel()
 	{
 		ds = new BasicDataSource();
 		ds.setDriverClassName(driverName);
@@ -61,35 +60,36 @@ public class SkaterModel implements Serializable {
 		return c;
 	}
 	
-	public Boolean addSkater(Skater skater)
+	public Boolean addRink(Rink rink)
 	{
 		Boolean bSuccess = true;
 		
 		try {
 		
-		Connection connection = this.getConnection();
-		PreparedStatement statement = connection.prepareStatement(SQL_INSERT);
-		statement.setString(1,skater.getFirstName());
-		statement.setString(2,skater.getLastName());
-		statement.setString(3,skater.getEmailPrimary());
-		statement.setString(4,skater.getSmsTextNumber());
-		statement.setString(5,skater.getZipCode());
-		statement.setObject(6,skater.getPassword(),Types.OTHER);
+			Connection connection = this.getConnection();
+			PreparedStatement statement = connection.prepareStatement(SQL_INSERT);
+			statement.setString(1,rink.getRinkName());
+			statement.setString(2,rink.getAddress());
+			statement.setString(3,rink.getStateCode());
+			statement.setString(4,rink.getZipCode());
+			statement.setString(5,rink.getManagerPhone());
+			statement.setString(6,rink.getManagerEmail());
+			statement.setObject(7,rink.getPassword(),Types.OTHER);
 		
-		statement.executeUpdate();
+			statement.executeUpdate();
 		} 
 		catch (SQLException se)
 		{
-		    logger.logp(Level.INFO,"SkaterModel","addSkater",se.toString());
+		    logger.logp(Level.INFO,"RinkModel","addRink",se.toString());
 			bSuccess =false;
 		}
 		
 		return bSuccess;
 	}
 	
-	public List<Skater> getFullList()
+	public List<Rink> getFullList()
 	{
-		List<Skater> skaterList = null;
+		List<Rink> rinkList = null;
 		
 		try {
 		
@@ -97,13 +97,19 @@ public class SkaterModel implements Serializable {
 			Statement statement = connection.createStatement();
 			ResultSet resultSet = statement.executeQuery(SQL_SELECT_FULL);
 			
-			skaterList = new ArrayList<Skater>();
+			rinkList = new ArrayList<Rink>();
 			
 			while(resultSet.next())
 			{
-				Skater skater = new Skater();
+				Rink rink = new Rink();
+				rink.setRinkName(resultSet.getString("RINKNAME"));
+				rink.setAddress(resultSet.getString("ADDRESS"));
+				rink.setStateCode(resultSet.getString("STATECODE"));
+				rink.setZipCode(resultSet.getString("ZIPCODE"));
+				rink.setManagerPhone(resultSet.getString("MANAGERPHONE"));
+				rink.setManagerEmail(resultSet.getString("MANAGEREMAIL"));
 				
-				skaterList.add(skater);
+				rinkList.add(rink);
 			}
 		}
 		catch (SQLException se)
@@ -111,6 +117,6 @@ public class SkaterModel implements Serializable {
 		    logger.logp(Level.INFO,"RinkModel","getFullList",se.toString());
 		}
 		
-		return skaterList;
+		return rinkList;
 	}
 }
