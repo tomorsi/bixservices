@@ -1,0 +1,43 @@
+
+
+
+<rinks>
+  <rink>
+    <rinkName>Nazareth Ice Oasis</rinkName>
+    <address>3140 Bay Road, Redwood City</address>
+    <stateCode>CA</stateCode>
+    <managerPhone>6503648090</managerPhone>
+    <managerEmail>hanna@iceasis.com</managerEmail>
+    <password>niemi5</password>
+  </rink>
+
+  <rink>
+    <rinkName>Dublin Iceland</rinkName>
+    <address>7212 San Ramon Road, Dublin</address>
+    <stateCode>CA</stateCode>
+    <managerPhone>9258294445</managerPhone>
+    <managerEmail>dublininfo@dubliniceland.com</managerEmail>
+    <password>thorton9</password>
+  </rink>
+  
+  <rink>
+    <rinkName>Shark Ices San Jose</rinkName>
+    <address>1500 South Tenth Street, San Jose</address>
+    <stateCode>CA</stateCode>
+    <managerPhone>4082796000</managerPhone>
+    <managerEmail>RSavoie@sharksice.com</managerEmail>
+    <password>burns5</password>
+  </rink>
+
+  <rink>
+    <rinkName>Yerba Buena Ice Rink</rinkName>
+    <address>750 Folsom Street, San Francisco</address>
+    <stateCode>CA</stateCode>
+    <managerPhone>4158203532</managerPhone>
+    <managerEmail>coachben@skatebowl.com</managerEmail>
+    <password>cheechu5</password>
+  </rink>
+
+</rinks>
+
+    
