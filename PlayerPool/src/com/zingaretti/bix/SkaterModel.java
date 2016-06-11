@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.postgresql.util.PSQLException;
 
 
 
@@ -67,21 +68,26 @@ public class SkaterModel implements Serializable {
 		
 		try {
 		
-		Connection connection = this.getConnection();
-		PreparedStatement statement = connection.prepareStatement(SQL_INSERT);
-		statement.setString(1,skater.getFirstName());
-		statement.setString(2,skater.getLastName());
-		statement.setString(3,skater.getEmailPrimary());
-		statement.setString(4,skater.getSmsTextNumber());
-		statement.setString(5,skater.getZipCode());
-		statement.setObject(6,skater.getPassword(),Types.OTHER);
+			Connection connection = this.getConnection();
+			PreparedStatement statement = connection.prepareStatement(SQL_INSERT);
+			statement.setString(1,skater.getFirstName());
+			statement.setString(2,skater.getLastName());
+			statement.setString(3,skater.getEmailPrimary());
+			statement.setString(4,skater.getSmsTextNumber());
+			statement.setString(5,skater.getZipCode());
+			statement.setObject(6,skater.getPassword(),Types.OTHER);
 		
-		statement.executeUpdate();
+			statement.executeUpdate();
 		} 
+		catch (PSQLException pse)
+		{
+		    logger.logp(Level.INFO,"SkaterModel","addSkater",pse.toString());
+		    bSuccess = false;
+		}
 		catch (SQLException se)
 		{
 		    logger.logp(Level.INFO,"SkaterModel","addSkater",se.toString());
-			bSuccess =false;
+			bSuccess = false;
 		}
 		
 		return bSuccess;
@@ -106,9 +112,13 @@ public class SkaterModel implements Serializable {
 				skaterList.add(skater);
 			}
 		}
+		catch (PSQLException pse)
+		{
+		    logger.logp(Level.INFO,"SkaterModel","getFullList",pse.toString());
+		}
 		catch (SQLException se)
 		{
-		    logger.logp(Level.INFO,"RinkModel","getFullList",se.toString());
+		    logger.logp(Level.INFO,"SkaterModel","getFullList",se.toString());
 		}
 		
 		return skaterList;

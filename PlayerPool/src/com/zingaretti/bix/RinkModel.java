@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 
 
 import org.apache.commons.dbcp2.BasicDataSource;
+import org.postgresql.util.PSQLException;
 
 
 
@@ -78,10 +79,15 @@ public class RinkModel implements Serializable {
 		
 			statement.executeUpdate();
 		} 
+		catch (PSQLException pse)
+		{
+			logger.logp(Level.INFO,"RinkModel","addRink",pse.toString());
+			bSuccess = false;
+		}
 		catch (SQLException se)
 		{
 		    logger.logp(Level.INFO,"RinkModel","addRink",se.toString());
-			bSuccess =false;
+			bSuccess = false;
 		}
 		
 		return bSuccess;
@@ -111,6 +117,11 @@ public class RinkModel implements Serializable {
 				
 				rinkList.add(rink);
 			}
+		}
+		catch (PSQLException pse)
+		{
+			logger.logp(Level.INFO,"RinkModel","getFullList",pse.toString());
+			
 		}
 		catch (SQLException se)
 		{

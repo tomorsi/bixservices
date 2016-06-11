@@ -65,7 +65,7 @@ public class PlayerPoolService {
    }
    
    @GET
-   @Path("/skaters")
+   @Path("/Skaters")
    @Produces(MediaType.APPLICATION_XML)
    public List<Skater> getSkaters(){
 	  logger.logp(Level.INFO,"PlayerPoolService","getSkaters","ENTER");
@@ -73,7 +73,7 @@ public class PlayerPoolService {
    }	
    
    @GET
-   @Path("/rinks")
+   @Path("/Rinks")
    @Produces(MediaType.APPLICATION_XML)
    public List<Rink> getRinks(){
 	  logger.logp(Level.INFO,"PlayerPoolService","getRinks","ENTER");
@@ -108,11 +108,9 @@ public class PlayerPoolService {
    {
 	   logger.logp(Level.INFO,"addRink using xml","addRink","ENTER");
 	   if (rinkModel.addRink(rink))
-	      	 return SUCCESS_RESULT;
+	       return SUCCESS_RESULT;
 	   else
-	   	 return FAILURE_RESULT;   
-   
-   
+	   	   return FAILURE_RESULT;   
    }
    
    @POST
