@@ -38,7 +38,7 @@ public class Rink {
 		logger.logp(Level.INFO,"Rink","getRinkName","ENTER");
 		return rinkName;
 	}
-	public void setRinkName(String firstName) {
+	public void setRinkName(String rinkName) {
 		logger.logp(Level.INFO,"Rink","setRinkName","ENTER");
 		this.rinkName = rinkName;
 	}

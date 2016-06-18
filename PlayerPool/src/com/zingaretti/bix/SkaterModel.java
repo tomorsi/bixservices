@@ -38,7 +38,7 @@ public class SkaterModel implements Serializable {
 		"VALUES(?,?,?,?,?,?,TRUE)";
 		
 	static private final String SQL_SELECT_FULL = 
-		"SELECT FIRSTNAME,LASTNAME,EMAILPRIMARY,SMSTEXTNUMBER,ZIPCODE,SKATER) FROM PLAYER";
+		"SELECT FIRSTNAME,LASTNAME,EMAILPRIMARY,SMSTEXTNUMBER,ZIPCODE,SKATER FROM PLAYER";
 		
 	SkaterModel()
 	{
@@ -108,6 +108,12 @@ public class SkaterModel implements Serializable {
 			while(resultSet.next())
 			{
 				Skater skater = new Skater();
+				skater.setFirstName(resultSet.getString("FIRSTNAME"));
+				skater.setLastName(resultSet.getString("LASTNAME"));
+				skater.setEmailPrimary(resultSet.getString("EMAILPRIMARY"));
+				skater.setSmsTextNumber(resultSet.getString("SMSTEXTNUMBER"));
+				skater.setZipCode(resultSet.getString("ZIPCODE"));
+				
 				
 				skaterList.add(skater);
 			}

@@ -41,26 +41,27 @@ public class PlayerPoolService {
 	   
 	   String jaxClass = "empty";
 	   try {
-		   jaxClass = getDebugJaxClass();
+		   //jaxClass = getDebugJaxClass();
 	   } catch (Exception e) {
 		   // TODO Auto-generated catch block
 		   e.printStackTrace();
 	   }
 	   logger.logp(Level.INFO,"PlayerPoolService","CTOR",jaxClass);
+   
 	   
    }
        
    private String getDebugJaxClass() throws Exception
    {
      JAXBContext jc = JAXBContext.newInstance(Rink.class);
-     Skater s = new Skater();
-     s.setFirstName("Tom");
-     s.setLastName("Orsi");
+     Rink r = new Rink();
+     r.setRinkName("Ice Oasis");
+   
      Marshaller marshaller = jc.createMarshaller();
      marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
      ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
      
-     marshaller.marshal(s, byteOutputStream);
+     marshaller.marshal(r, byteOutputStream);
      return byteOutputStream.toString();
    }
    
@@ -80,6 +81,14 @@ public class PlayerPoolService {
       return rinkModel.getFullList();
    }
    
+   @GET
+   @Path("/RinkJson")
+   @Produces(MediaType.APPLICATION_JSON)
+   public List<Rink> getRinksJson(){
+	  logger.logp(Level.INFO,"PlayerPoolService","getRinks","ENTER");
+      List<Rink> list = rinkModel.getFullList();
+  	  return list;	
+   }
    
    /*
     * Add a Skater object using the xml application type. 
@@ -92,9 +101,9 @@ public class PlayerPoolService {
    {
 	   logger.logp(Level.INFO,"addSkater By XML","addSkater","ENTER");
 	   if (skaterModel.addSkater(skater))
-	   	 return SUCCESS_RESULT;
+	       return SUCCESS_RESULT;
 	   else
-	   	 return FAILURE_RESULT;   
+	       return FAILURE_RESULT;   
    }
    
    /*

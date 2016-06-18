@@ -1,5 +1,5 @@
-
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
 <skaters>
 <skater>
 <firstName>Tom</firstName>
@@ -25,6 +25,7 @@
 <zipCode>94080</zipCode>
 <password>izzy6</password>
 </skater>
+<skater>
 <firstName>Phil</firstName>
 <lastName>Eposito</lastName>
 <emailPrimary>pesposito52@yahoo.com</emailPrimary>
@@ -32,7 +33,6 @@
 <zipCode>94122</zipCode>
 <password>borland6</password>
 </skater>
-
 </skaters>
 
 
