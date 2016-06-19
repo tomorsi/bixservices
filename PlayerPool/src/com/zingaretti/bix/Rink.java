@@ -54,7 +54,7 @@ public class Rink {
 		return stateCode;
 	}
 	public void setStateCode(String stateCode) {
-		this.zipCode = stateCode;
+		this.stateCode = stateCode;
 	}
 
 	public String getZipCode() {
