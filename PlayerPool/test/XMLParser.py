@@ -1,6 +1,6 @@
 from xml.etree import ElementTree
 
-class Parser:
+class XMLParser:
     """
     The XML parser that parse the data files for
     testing the RESTFUL APIs

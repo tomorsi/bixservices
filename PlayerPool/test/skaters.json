@@ -1,0 +1,44 @@
+{
+    "skater": [
+      {
+        "firstName": "Tom",
+        "lastName": "Orsi",
+        "emailPrimary": "tom.orsi@yahoo.com",
+        "smsTextNumber": "(415) 533-1743",
+        "zipCode": "94044",
+        "password": "borland6"
+      },
+      {
+        "firstName": "Thomas",
+        "lastName": "Orsi",
+        "emailPrimary": "thmsorsi@yahoo.com",
+        "smsTextNumber": "9492484277",
+        "zipCode": "92675",
+        "password": "watson"
+      },
+      {
+        "firstName": "Valerie",
+        "lastName": "Pacifica",
+        "emailPrimary": "valerie.pacific@gmail.com",
+        "smsTextNumber": "8087836703",
+        "zipCode": "94080",
+        "password": "izzy6"
+      },
+      {
+        "firstName": "Phil",
+        "lastName": "Eposito",
+        "emailPrimary": "pesposito52@yahoo.com",
+        "smsTextNumber": "4157598102",
+        "zipCode": "94122",
+        "password": "borland6"
+      },
+      {
+        "firstName": "Brent",
+        "lastName": "Burns",
+        "emailPrimary": "bburns@yahoo.com",
+        "smsTextNumber": "4155551212",
+        "zipCode": "94122",
+        "password": "sjsharks99"
+      }
+    ]
+}

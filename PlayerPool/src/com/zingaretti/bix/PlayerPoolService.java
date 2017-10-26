@@ -67,7 +67,7 @@ public class PlayerPoolService {
    
    @GET
    @Path("/Skaters")
-   @Produces(MediaType.APPLICATION_XML)
+   @Produces(MediaType.APPLICATION_JSON)
    public List<Skater> getSkaters(){
 	  logger.logp(Level.INFO,"PlayerPoolService","getSkaters","ENTER");
       return skaterModel.getFullList();
@@ -75,27 +75,19 @@ public class PlayerPoolService {
    
    @GET
    @Path("/Rinks")
-   @Produces(MediaType.APPLICATION_XML)
+   @Produces(MediaType.APPLICATION_JSON)
    public List<Rink> getRinks(){
 	  logger.logp(Level.INFO,"PlayerPoolService","getRinks","ENTER");
       return rinkModel.getFullList();
    }
    
-   @GET
-   @Path("/RinkJson")
-   @Produces(MediaType.APPLICATION_JSON)
-   public List<Rink> getRinksJson(){
-	  logger.logp(Level.INFO,"PlayerPoolService","getRinks","ENTER");
-      List<Rink> list = rinkModel.getFullList();
-  	  return list;	
-   }
-   
+    
    /*
     * Add a Skater object using the xml application type. 
     */
    @PUT
    @Path("/Skater")
-   @Consumes(MediaType.APPLICATION_XML)
+   @Consumes(MediaType.APPLICATION_JSON)
    @Produces(MediaType.TEXT_HTML)
    public String addSkater(Skater skater)
    {
@@ -111,7 +103,7 @@ public class PlayerPoolService {
     */
    @PUT
    @Path("/Rink")
-   @Consumes(MediaType.APPLICATION_XML)
+   @Consumes(MediaType.APPLICATION_JSON)
    @Produces(MediaType.TEXT_HTML)
    public String addRink(Rink rink)
    {
