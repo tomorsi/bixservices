@@ -1,0 +1,41 @@
+<!doctype html>
+<htmlp>
+  <head>
+    <title>BIX ADMINISTRATION</title>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="BixAdminRestful.js"></script>
+
+    <script>
+      var app = angular.module('rinksApp', []);
+
+      app.controller('rinksCtrl', getRinksJson);
+
+//      app.controller('rinksCtrl', function($scope, $http) {
+//      $http.get("http://abdul:8080/PlayerPoolService/rest/PlayerPoolService/RinkJson")
+//      .then(function (response) { $scope.rinks = response.data; }); });
+
+    </script>
+
+  </head>
+
+  <body>
+
+    <div ng-app="rinksApp" ng-controller="rinksCtrl">
+      <table border="5">
+
+        <tr>
+            <th>Rink Name</th>
+	    <th>Rink Address</th>
+	    <th>State</th>
+	</tr>
+	<tr ng-repeat="rink in rinks">
+	  <td>{{ rink.rinkName }}</td>
+	  <td>{{ rink.address }}, {{ rink.stateCode }}</td>
+	  <td>{{ rink.zipCode }}</td>
+	</tr>
+      </table>
+    </div>
+
+  </body>
+</html>
